@@ -749,6 +749,142 @@
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--border-bright); }
 
+    /* RIGHT SIDEBAR TABS */
+    .sidebar-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .sidebar-tab {
+      flex: 1;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 11px 8px;
+      cursor: pointer;
+      color: var(--text-dim);
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .sidebar-tab:hover { color: var(--text); }
+    .sidebar-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .tab-panel { display: none; flex: 1; flex-direction: column; overflow: hidden; }
+    .tab-panel.active { display: flex; }
+
+    /* KQL REFERENCE PANEL */
+    .kql-ref {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 16px;
+    }
+
+    .kql-section {
+      margin-bottom: 20px;
+    }
+
+    .kql-section-title {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--accent);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .kql-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    .kql-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--accent);
+      padding: 10px 12px;
+      margin-bottom: 6px;
+      border-radius: 0 2px 2px 0;
+    }
+    .kql-card-op {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      margin-bottom: 3px;
+    }
+    .kql-card-desc {
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+    .kql-card-example {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--accent3);
+      background: rgba(0,0,0,0.3);
+      padding: 4px 8px;
+      margin-top: 6px;
+      border-radius: 2px;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    /* CONVERSION TIP BANNER */
+    .conversion-tip {
+      margin: 0 16px 14px;
+      background: rgba(255,107,53,0.06);
+      border: 1px solid rgba(255,107,53,0.25);
+      border-left: 3px solid var(--accent2);
+      padding: 10px 12px;
+      border-radius: 0 2px 2px 0;
+      flex-shrink: 0;
+    }
+    .conversion-tip-title {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--accent2);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .conversion-tip-body {
+      font-size: 11px;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+    .conversion-tip-body a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .conversion-tip-body a:hover { text-decoration: underline; }
+    .conversion-tip-body code {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--accent3);
+      background: rgba(0,0,0,0.3);
+      padding: 1px 5px;
+    }
+
+    .kql-ref-links {
+      padding: 10px 16px 14px;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .kql-ref-link {
+      display: block;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 4px 0;
+      letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    .kql-ref-link:hover { color: var(--accent); }
+    .kql-ref-link::before { content: '→ '; }
+
     /* RESPONSIVE */
     @media (max-width: 1100px) {
       .app { grid-template-columns: 240px 1fr 300px; }
@@ -858,7 +994,7 @@
       <div class="step-num">07</div>
       <div class="step-info">
         <div class="step-name">Detection Logic</div>
-        <div class="step-desc">Sigma / KQL / SPL</div>
+        <div class="step-desc">KQL → Sigma / SPL</div>
       </div>
       <div class="step-check">✓</div>
     </div>
@@ -902,8 +1038,7 @@
         <div class="welcome-icon">🔍</div>
         <div class="welcome-title">ADS <span>Forge</span></div>
         <div class="welcome-body">
-          An AI-powered Detection Strategy builder. Describe a threat behavior and Claude will guide you through building a production-ready, peer-review-quality ADS — complete with MITRE ATT&amp;CK mapping, blind spots, false positives, and detection logic in Sigma, KQL, or SPL.
-        </div>
+          An AI-powered Detection Strategy builder. Describe a threat behavior and Claude will guide you through building a production-ready ADS — with KQL for Microsoft Sentinel / Defender XDR, MITRE ATT&CK mapping, blind spots, and Sigma/SPL conversion tips.</div>
         <div class="welcome-steps">
           <div class="welcome-step">
             <div class="welcome-step-num">01 → GOAL</div>
@@ -914,12 +1049,12 @@
             <div class="welcome-step-text">Auto-mapped to ATT&CK framework</div>
           </div>
           <div class="welcome-step">
-            <div class="welcome-step-num">03 → LOGIC</div>
-            <div class="welcome-step-text">Production Sigma / KQL / SPL generated</div>
+            <div class="welcome-step-num">03 → KQL</div>
+            <div class="welcome-step-text">Production KQL for Sentinel / Defender XDR</div>
           </div>
           <div class="welcome-step">
             <div class="welcome-step-num">04 → EXPORT</div>
-            <div class="welcome-step-text">Download full ADS as Markdown</div>
+            <div class="welcome-step-text">Markdown, JSON, or convert KQL → Sigma</div>
           </div>
         </div>
       </div>
@@ -940,59 +1075,183 @@
     </div>
   </div>
 
-  <!-- RIGHT SIDEBAR — LIVE ADS DOC -->
+  <!-- RIGHT SIDEBAR — TABBED: ADS DOC + KQL REF -->
   <div class="sidebar-right">
-    <div class="doc-header">
-      <div class="doc-title">ADS DOCUMENT</div>
-      <div class="doc-status draft" id="docStatus">● DRAFT</div>
+
+    <!-- TABS -->
+    <div class="sidebar-tabs">
+      <button class="sidebar-tab active" onclick="switchTab('doc', this)">ADS DOC</button>
+      <button class="sidebar-tab" onclick="switchTab('kql', this)">KQL REF</button>
     </div>
-    <div class="doc-body" id="docBody">
-      <div class="doc-field">
-        <div class="doc-field-label">Goal</div>
-        <div class="doc-field-value empty" id="doc-goal">Not yet defined</div>
+
+    <!-- TAB: ADS DOCUMENT -->
+    <div class="tab-panel active" id="tab-doc">
+      <div class="doc-header">
+        <div class="doc-title">LIVE DOCUMENT</div>
+        <div class="doc-status draft" id="docStatus">● DRAFT</div>
       </div>
-      <div class="doc-field">
-        <div class="doc-field-label">MITRE ATT&CK</div>
-        <div class="doc-field-value" id="doc-mitre"><span class="doc-field-value empty">Not yet mapped</span></div>
+      <div class="doc-body" id="docBody">
+        <div class="doc-field">
+          <div class="doc-field-label">Goal</div>
+          <div class="doc-field-value empty" id="doc-goal">Not yet defined</div>
+        </div>
+        <div class="doc-field">
+          <div class="doc-field-label">MITRE ATT&CK</div>
+          <div class="doc-field-value" id="doc-mitre"><span class="doc-field-value empty">Not yet mapped</span></div>
+        </div>
+        <div class="doc-field">
+          <div class="doc-field-label">Strategy Abstract</div>
+          <div class="doc-field-value empty" id="doc-abstract">Not yet generated</div>
+        </div>
+        <div class="doc-field">
+          <div class="doc-field-label">Technical Context</div>
+          <div class="doc-field-value empty" id="doc-context">Not yet generated</div>
+        </div>
+        <div class="doc-field">
+          <div class="doc-field-label">Blind Spots</div>
+          <div class="doc-field-value empty" id="doc-blindspots">Not yet analyzed</div>
+        </div>
+        <div class="doc-field">
+          <div class="doc-field-label">False Positives</div>
+          <div class="doc-field-value empty" id="doc-fp">Not yet analyzed</div>
+        </div>
+        <div class="doc-field">
+          <div class="doc-field-label">Detection Logic (KQL)</div>
+          <div class="doc-field-value empty" id="doc-logic">Not yet generated</div>
+        </div>
+        <div class="doc-field">
+          <div class="doc-field-label">Validation Steps</div>
+          <div class="doc-field-value empty" id="doc-validation">Not yet defined</div>
+        </div>
+        <div class="doc-field">
+          <div class="doc-field-label">Priority</div>
+          <div class="doc-field-value" id="doc-priority"><span class="doc-field-value empty">Not yet determined</span></div>
+        </div>
+        <div class="doc-field">
+          <div class="doc-field-label">Response Runbook</div>
+          <div class="doc-field-value empty" id="doc-response">Not yet generated</div>
+        </div>
       </div>
-      <div class="doc-field">
-        <div class="doc-field-label">Strategy Abstract</div>
-        <div class="doc-field-value empty" id="doc-abstract">Not yet generated</div>
-      </div>
-      <div class="doc-field">
-        <div class="doc-field-label">Technical Context</div>
-        <div class="doc-field-value empty" id="doc-context">Not yet generated</div>
-      </div>
-      <div class="doc-field">
-        <div class="doc-field-label">Blind Spots</div>
-        <div class="doc-field-value empty" id="doc-blindspots">Not yet analyzed</div>
-      </div>
-      <div class="doc-field">
-        <div class="doc-field-label">False Positives</div>
-        <div class="doc-field-value empty" id="doc-fp">Not yet analyzed</div>
-      </div>
-      <div class="doc-field">
-        <div class="doc-field-label">Detection Logic</div>
-        <div class="doc-field-value empty" id="doc-logic">Not yet generated</div>
-      </div>
-      <div class="doc-field">
-        <div class="doc-field-label">Validation Steps</div>
-        <div class="doc-field-value empty" id="doc-validation">Not yet defined</div>
-      </div>
-      <div class="doc-field">
-        <div class="doc-field-label">Priority</div>
-        <div class="doc-field-value" id="doc-priority"><span class="doc-field-value empty">Not yet determined</span></div>
-      </div>
-      <div class="doc-field">
-        <div class="doc-field-label">Response Runbook</div>
-        <div class="doc-field-value empty" id="doc-response">Not yet generated</div>
+      <div class="doc-footer">
+        <button class="export-btn primary-export" onclick="exportMarkdown()">↓ MARKDOWN</button>
+        <button class="export-btn" onclick="exportJSON()">↓ JSON</button>
+        <button class="export-btn" onclick="copyKQL()" title="Copy KQL — convert to Sigma at uncoder.io">⎘ KQL</button>
       </div>
     </div>
-    <div class="doc-footer">
-      <button class="export-btn primary-export" onclick="exportMarkdown()">↓ MARKDOWN</button>
-      <button class="export-btn" onclick="exportJSON()">↓ JSON</button>
-      <button class="export-btn" onclick="copySigma()">⎘ SIGMA</button>
+
+    <!-- TAB: KQL REFERENCE -->
+    <div class="tab-panel" id="tab-kql">
+
+      <div class="conversion-tip">
+        <div class="conversion-tip-title">⇄ KQL → SIGMA CONVERSION</div>
+        <div class="conversion-tip-body">
+          KQL is your production rule. To convert to Sigma or SPL:<br><br>
+          <strong>Browser:</strong> <a href="https://uncoder.io" target="_blank">uncoder.io</a> — paste KQL, pick output format.<br>
+          <strong>CLI:</strong> <code>pip install pySigma pySigma-backend-microsoft365defender</code><br>
+          <strong>PowerShell:</strong> <a href="https://github.com/jeremyhagan/Sigma2Sentinel" target="_blank">Sigma2Sentinel module</a><br><br>
+          <strong>⚠ Table note:</strong> Sentinel → <code>TimeGenerated</code> · Defender XDR → <code>Timestamp</code>
+        </div>
+      </div>
+
+      <div class="kql-ref">
+
+        <div class="kql-section">
+          <div class="kql-section-title">FILTERING</div>
+          <div class="kql-card">
+            <div class="kql-card-op">where</div>
+            <div class="kql-card-desc">Filter rows. Put early in query to reduce data scanned.</div>
+            <div class="kql-card-example">| where TimeGenerated >= ago(1d)</div>
+          </div>
+          <div class="kql-card">
+            <div class="kql-card-op">has / has_any</div>
+            <div class="kql-card-desc">Faster than contains for indexed columns. Use for token matching.</div>
+            <div class="kql-card-example">| where CommandLine has "powershell"
+| where Process has_any ("cmd.exe","wscript.exe")</div>
+          </div>
+          <div class="kql-card">
+            <div class="kql-card-op">in~ / =~</div>
+            <div class="kql-card-desc">Case-insensitive equality. in~ for lists, =~ for single values.</div>
+            <div class="kql-card-example">| where FileName =~ "lsass.exe"
+| where Protocol in~ ("tcp","udp")</div>
+          </div>
+          <div class="kql-card">
+            <div class="kql-card-op">not / !in~</div>
+            <div class="kql-card-desc">Exclude known-good. Combine with let allowlists for easy tuning.</div>
+            <div class="kql-card-example">let Allow = dynamic(["svchost.exe"]);
+| where Process !in~ (Allow)</div>
+          </div>
+        </div>
+
+        <div class="kql-section">
+          <div class="kql-section-title">SHAPING OUTPUT</div>
+          <div class="kql-card">
+            <div class="kql-card-op">project</div>
+            <div class="kql-card-desc">Select columns explicitly. Always use to reduce result size.</div>
+            <div class="kql-card-example">| project TimeGenerated, DeviceName, AccountName, CommandLine</div>
+          </div>
+          <div class="kql-card">
+            <div class="kql-card-op">extend</div>
+            <div class="kql-card-desc">Add computed fields without dropping existing columns.</div>
+            <div class="kql-card-example">| extend Severity = "High", MITRE = "T1003.001"</div>
+          </div>
+          <div class="kql-card">
+            <div class="kql-card-op">summarize</div>
+            <div class="kql-card-desc">Aggregate for threshold-based detections (e.g. brute force).</div>
+            <div class="kql-card-example">| summarize Fails = count() by AccountName, bin(TimeGenerated, 5m)
+| where Fails > 10</div>
+          </div>
+        </div>
+
+        <div class="kql-section">
+          <div class="kql-section-title">KEY SENTINEL TABLES</div>
+          <div class="kql-card">
+            <div class="kql-card-op">SecurityEvent</div>
+            <div class="kql-card-desc">Windows events: 4624/25 (logon), 4688 (process), 4728/32 (group mod)</div>
+          </div>
+          <div class="kql-card">
+            <div class="kql-card-op">DeviceProcessEvents</div>
+            <div class="kql-card-desc">MDE process creation — richer than 4688, includes full command lines</div>
+          </div>
+          <div class="kql-card">
+            <div class="kql-card-op">DeviceNetworkEvents</div>
+            <div class="kql-card-desc">MDE network connections: RemoteIP, RemotePort, InitiatingProcessFileName</div>
+          </div>
+          <div class="kql-card">
+            <div class="kql-card-op">DeviceEvents</div>
+            <div class="kql-card-desc">MDE misc: OpenProcessApiCall (LSASS), AntivirusDetection, etc.</div>
+          </div>
+          <div class="kql-card">
+            <div class="kql-card-op">SigninLogs</div>
+            <div class="kql-card-desc">Entra ID sign-ins: impossible travel, MFA anomalies, token theft</div>
+          </div>
+        </div>
+
+        <div class="kql-section">
+          <div class="kql-section-title">ALLOWLIST PATTERN</div>
+          <div class="kql-card">
+            <div class="kql-card-op">let AllowList</div>
+            <div class="kql-card-desc">Define tunable exclusions at top — engineers tune without rewriting logic.</div>
+            <div class="kql-card-example">let SafePaths = dynamic([
+  "C:\\Windows\\System32\\",
+  "C:\\Program Files\\"
+]);
+DeviceProcessEvents
+| where not (FolderPath has_any (SafePaths))</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="kql-ref-links">
+        <a class="kql-ref-link" href="https://learn.microsoft.com/en-us/kusto/query/" target="_blank">KQL Language Reference — Microsoft Learn</a>
+        <a class="kql-ref-link" href="https://github.com/microsoft/Kusto-Query-Language" target="_blank">microsoft/Kusto-Query-Language (official)</a>
+        <a class="kql-ref-link" href="https://github.com/Azure/Azure-Sentinel" target="_blank">Azure/Azure-Sentinel (official rules)</a>
+        <a class="kql-ref-link" href="https://github.com/Bert-JanP/Hunting-Queries-Detection-Rules" target="_blank">Bert-JanP — KQL Detection Rules</a>
+        <a class="kql-ref-link" href="https://uncoder.io" target="_blank">Uncoder.io — KQL ↔ Sigma converter</a>
+        <a class="kql-ref-link" href="https://learn.microsoft.com/en-us/kusto/query/best-practices" target="_blank">KQL Best Practices — Microsoft</a>
+      </div>
     </div>
+
   </div>
 
 </div>
@@ -1047,8 +1306,8 @@
     },
     {
       label: 'PHASE 07 — DETECTION LOGIC',
-      title: 'Generate production detection code',
-      desc: 'Claude will produce a ready-to-deploy detection rule in Sigma (universal), KQL (Sentinel/Defender), and/or SPL (Splunk).',
+      title: 'Generate production KQL detection',
+      desc: 'Claude will produce a KQL query ready for Microsoft Sentinel or Defender XDR, with optional Sigma (universal) and SPL (Splunk) exports.',
       key: 'logic'
     },
     {
@@ -1065,54 +1324,84 @@
     }
   ];
 
-  const SYSTEM_PROMPT = `You are ADS Forge, an elite detection engineering assistant specialized in building Alerting and Detection Strategies (ADS) following the Palantir ADS Framework and MITRE ATT&CK.
+  const SYSTEM_PROMPT = `You are ADS Forge, an elite detection engineering assistant specialized in building Alerting and Detection Strategies (ADS) following the Palantir ADS Framework and MITRE ATT&CK. You are a KQL expert with deep knowledge of Microsoft Sentinel, Microsoft Defender XDR, and Azure Data Explorer.
 
 Your core mission: Guide security engineers through creating high-quality, production-ready detection strategies that are:
 - High-fidelity (minimal false positives)
-- Thoroughly documented
-- MITRE ATT&CK mapped
+- Thoroughly documented per the Palantir ADS Framework
+- MITRE ATT&CK mapped (tactic + technique + sub-technique)
+- Written in KQL as the primary detection language
 - Validated and testable
 
-ADS Framework sections you help build:
+## KQL EXPERTISE & BEST PRACTICES
+You write KQL following official Microsoft guidelines (https://learn.microsoft.com/en-us/kusto/query/best-practices):
+- Use KQL as the PRIMARY output language. Always generate KQL first.
+- Target Microsoft Sentinel (use TimeGenerated for time filtering) and Defender XDR Advanced Hunting (use Timestamp) — note which table belongs to which platform.
+- Use 'let' statements for reusable variables (e.g., allowlists, thresholds, dynamic arrays).
+- Filter early: put 'where' clauses before joins and summarize to reduce data scanned.
+- Use 'has' instead of 'contains' for string lookups on indexed columns — it is significantly faster.
+- Use 'has_any()' and 'in~' for multi-value lookups; use '=~' for case-insensitive equality.
+- Prefer 'project' over 'project-away' — explicitly select only needed columns.
+- Use 'extend' to compute new fields rather than repeating expressions.
+- Avoid wildcards at the start of strings (e.g., use 'endswith' not 'contains "\\lsass.exe"').
+- Use 'summarize' with 'arg_max' or 'arg_min' for deduplication, not 'distinct' on large datasets.
+- Leverage native Sentinel tables: SecurityEvent, DeviceEvents, DeviceProcessEvents, DeviceNetworkEvents, DeviceFileEvents, DeviceRegistryEvents, SigninLogs, AuditLogs, OfficeActivity, CommonSecurityLog, Syslog.
+- Leverage Defender XDR tables: DeviceProcessEvents, DeviceNetworkEvents, DeviceFileEvents, DeviceEvents, DeviceRegistryEvents, IdentityLogonEvents, AlertEvidence.
+- Always include comments (// Comment) explaining detection logic, access masks, event IDs, and filter rationale.
+- Include entity mapping fields (DeviceName, AccountName, IP) so Sentinel can auto-create incident entities.
+
+## KQL → SIGMA CONVERSION GUIDANCE
+After generating KQL, always offer to convert to Sigma (universal format) or SPL (Splunk):
+- Sigma is the vendor-agnostic YAML format. KQL can be converted using: pySigma (pip install pySigma pySigma-backend-microsoft365defender), Uncoder.io (browser, no install), or the sigma-cli tool.
+- Remind users: Sigma uses logsource + detection + condition blocks. The KQL 'where' clauses map to Sigma 'selection' conditions. KQL 'not' filters map to Sigma 'filter' + 'condition: selection and not filter'.
+- When showing a Sigma equivalent, always note it as a conversion for portability — KQL remains the primary, production-ready form.
+
+## ADS Framework sections you help build:
 1. GOAL — Clear plaintext description of behavior being detected
 2. MITRE CATEGORIZATION — Tactic + Technique + Sub-technique IDs (e.g., TA0006 / T1003.001)
 3. STRATEGY ABSTRACT — How the detection works at a high level
-4. TECHNICAL CONTEXT — Data sources, log types, event IDs, prerequisites
+4. TECHNICAL CONTEXT — Data sources, Sentinel/Defender table names, event IDs, prerequisites
 5. BLIND SPOTS — Assumptions and conditions where the rule will NOT fire
-6. FALSE POSITIVES — Known benign scenarios that may trigger the alert
-7. DETECTION LOGIC — Production-ready Sigma rules, KQL, and/or SPL queries
-8. VALIDATION — Step-by-step true positive generation (like Atomic Red Team tests)
+6. FALSE POSITIVES — Known benign scenarios; suggest 'let' allowlist variables to suppress them
+7. DETECTION LOGIC — KQL first (Sentinel + Defender XDR variants), then optional Sigma / SPL
+8. VALIDATION — Step-by-step true positive generation (Atomic Red Team test references)
 9. PRIORITY & RESPONSE — Severity rating and analyst response runbook
 
-When generating detection logic:
-- Always provide Sigma format first (universal, vendor-agnostic)
-- Also provide KQL (Microsoft Sentinel/Defender) and SPL (Splunk) when practical
-- Rules must be syntactically correct and production-deployable
-- Include comments explaining each clause
+When generating detection logic, structure it as:
+\`\`\`kql
+// [Rule Title]
+// MITRE: [Technique ID] — [Name]
+// Platform: Microsoft Sentinel (TimeGenerated) | Defender XDR (change to Timestamp)
+// Severity: [Critical|High|Medium|Low]
+
+let AllowList = dynamic(["value1", "value2"]); // tune to environment
+TableName
+| where TimeGenerated >= ago(1d)
+| where [filter conditions]
+| where not ([false positive filters])
+| project TimeGenerated, DeviceName, AccountName, [other relevant fields]
+| extend AlertTitle = "[Rule Name]", MITRE = "[T-ID]"
+\`\`\`
 
 When mapping to MITRE ATT&CK:
 - Provide both parent technique AND sub-technique IDs when applicable
-- Include the full technique name and tactic (e.g., Credential Access / OS Credential Dumping / LSASS Memory — T1003.001)
-- Note which techniques overlap or chain together
+- Include full technique name and tactic
+- Note which techniques overlap or chain
 
-For blind spots:
-- Think adversarially — how would an attacker evade this detection?
-- Be specific about log source failures, timing windows, privilege requirements
+For blind spots — think adversarially: log source gaps, timing windows, privilege requirements, evasion via renamed binaries, indirect execution.
 
-For false positives:
-- Think about legitimate admin tools, software deployment systems, security scanners
-- Suggest suppression strategies (allowlists, additional context filters)
+For false positives — use 'let AllowList = dynamic([...])' patterns so engineers can tune without rewriting logic.
 
-Tone: Expert but concise. Use precise security terminology. Structure output clearly with headers when generating full sections. Be direct — no filler.
+Tone: Expert but concise. Precise security + KQL terminology. Direct — no filler.
 
-When you produce a complete section of the ADS, prefix it clearly so the UI can parse it:
+When you produce a complete ADS section, prefix it so the UI can parse it:
 - For GOAL: start with "GOAL:"
 - For MITRE: start with "MITRE:" and list techniques as "TECHNIQUE: [ID] [Name] ([Tactic])"
 - For ABSTRACT: start with "ABSTRACT:"
 - For CONTEXT: start with "CONTEXT:"
 - For BLINDSPOTS: start with "BLINDSPOTS:"
 - For FALSE_POSITIVES: start with "FALSE_POSITIVES:"
-- For LOGIC: start with "LOGIC:" followed by code blocks
+- For LOGIC: start with "LOGIC:" followed by KQL code block
 - For VALIDATION: start with "VALIDATION:"
 - For PRIORITY: start with "PRIORITY: [CRITICAL|HIGH|MEDIUM|LOW]"
 - For RESPONSE: start with "RESPONSE:"`;
@@ -1397,7 +1686,7 @@ Use the exact prefixes specified in your instructions so the UI can parse each s
         'What data sources and log types are required? Tell me your SIEM and telemetry stack.',
         'Let\'s think adversarially — what are the blind spots and assumptions this detection relies on?',
         'What legitimate activity might trigger this detection as a false positive?',
-        'Ready to generate detection logic. Which format do you need: Sigma, KQL (Sentinel), SPL (Splunk), or all three?',
+        'Ready to generate detection logic. I\'ll write the KQL query for Microsoft Sentinel / Defender XDR first. Tell me your primary SIEM — Sentinel or Defender XDR — and whether you want a Sigma or SPL conversion too.',
         'Let\'s define validation steps — how would you generate a true positive to test this rule?',
         'Finally, what priority should this alert be, and what\'s the response runbook for analysts?'
       ];
@@ -1550,11 +1839,12 @@ ${adsData.response || 'Not generated'}
     download('ads-strategy.json', JSON.stringify(adsData, null, 2));
   }
 
-  function copySigma() {
+  function copyKQL() {
     if (!adsData.logic) { alert('No detection logic generated yet.'); return; }
-    const sigmaMatch = adsData.logic.match(/title:[\s\S]+?(?=\n---|\nKQL:|$)/i);
-    const sigma = sigmaMatch ? sigmaMatch[0] : adsData.logic;
-    navigator.clipboard.writeText(sigma).then(() => alert('Sigma rule copied to clipboard!'));
+    // Extract the first KQL block (between ```kql ... ```)
+    const kqlMatch = adsData.logic.match(/```kql\n([\s\S]+?)```/i);
+    const kql = kqlMatch ? kqlMatch[1].trim() : adsData.logic;
+    navigator.clipboard.writeText(kql).then(() => alert('KQL rule copied to clipboard!\n\nTo convert to Sigma: paste into https://uncoder.io and select Sigma as output.'));
   }
 
   function download(filename, content) {
@@ -1562,6 +1852,14 @@ ${adsData.response || 'Not generated'}
     a.href = URL.createObjectURL(new Blob([content], { type: 'text/plain' }));
     a.download = filename;
     a.click();
+  }
+
+  // ─── TAB SWITCHING ────────────────────────────────────────────────────────────
+  function switchTab(name, btn) {
+    document.querySelectorAll('.sidebar-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + name).classList.add('active');
   }
 
   // ─── INIT ─────────────────────────────────────────────────────────────────────
