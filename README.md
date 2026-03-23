@@ -38,24 +38,6 @@ Most security teams write detection rules ad-hoc — no documentation, no peer r
 8. **Validation** — Steps to generate a true positive
 9. **Priority & Response Runbook** — Severity + analyst playbook
 
-## Quickstart
-
-### Option 1: GitHub Pages (zero setup)
-1. Fork this repo
-2. Go to **Settings → Pages → Deploy from main branch**
-3. Share your `https://yourusername.github.io/ads-forge` URL
-
-### Option 2: Run locally
-```bash
-# No build step needed — just open the HTML file
-open index.html
-# or serve it
-npx serve .
-```
-
-### Option 3: Deploy to Netlify / Vercel
-Drop the repo into [Netlify Drop](https://app.netlify.com/drop) — done in 30 seconds.
-
 ## Usage
 
 1. Open the app in your browser
